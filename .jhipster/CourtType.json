@@ -1,0 +1,27 @@
+{
+  "annotations": {
+    "changelogDate": "20240819213324"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "typeName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ballCourtID",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "CourtType",
+  "relationships": [
+    {
+      "otherEntityName": "basketballCourt",
+      "otherEntityRelationshipName": "courtType",
+      "relationshipName": "ballCourts",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

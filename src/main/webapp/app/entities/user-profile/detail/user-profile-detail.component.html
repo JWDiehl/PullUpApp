@@ -1,0 +1,59 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (userProfile()) {
+      <div>
+        <h2 data-cy="userProfileDetailsHeading"><span jhiTranslate="pullUpApp3App.userProfile.detail.title">User Profile</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ userProfile()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.userProfile.username">Username</span></dt>
+          <dd>
+            <span>{{ userProfile()!.username }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.userProfile.email">Email</span></dt>
+          <dd>
+            <span>{{ userProfile()!.email }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.userProfile.password">Password</span></dt>
+          <dd>
+            <span>{{ userProfile()!.password }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.userProfile.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ userProfile()!.longitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.userProfile.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ userProfile()!.latitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.userProfile.savedCourts">Saved Courts</span></dt>
+          <dd>
+            @for (savedCourts of userProfile()!.savedCourts; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/basketball-court', savedCourts.id, 'view']">{{ savedCourts?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/user-profile', userProfile()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

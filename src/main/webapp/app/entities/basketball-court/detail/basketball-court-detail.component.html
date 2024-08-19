@@ -1,0 +1,73 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (basketballCourt()) {
+      <div>
+        <h2 data-cy="basketballCourtDetailsHeading">
+          <span jhiTranslate="pullUpApp3App.basketballCourt.detail.title">Basketball Court</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ basketballCourt()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.courtName">Court Name</span></dt>
+          <dd>
+            <span>{{ basketballCourt()!.courtName }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.state">State</span></dt>
+          <dd>
+            <span>{{ basketballCourt()!.state }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.zipCode">Zip Code</span></dt>
+          <dd>
+            <span>{{ basketballCourt()!.zipCode }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.streetAddress">Street Address</span></dt>
+          <dd>
+            <span>{{ basketballCourt()!.streetAddress }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.longitude">Longitude</span></dt>
+          <dd>
+            <span>{{ basketballCourt()!.longitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.latitude">Latitude</span></dt>
+          <dd>
+            <span>{{ basketballCourt()!.latitude }}</span>
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.courtType">Court Type</span></dt>
+          <dd>
+            @if (basketballCourt()!.courtType) {
+              <div>
+                <a [routerLink]="['/court-type', basketballCourt()!.courtType?.id, 'view']">{{ basketballCourt()!.courtType?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="pullUpApp3App.basketballCourt.userProfiles">User Profiles</span></dt>
+          <dd>
+            @for (userProfiles of basketballCourt()!.userProfiles; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/user-profile', userProfiles.id, 'view']">{{ userProfiles?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/basketball-court', basketballCourt()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

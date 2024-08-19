@@ -1,0 +1,50 @@
+{
+  "annotations": {
+    "changelogDate": "20240819213323"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "courtName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "zipCode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "streetAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "String"
+    }
+  ],
+  "name": "BasketballCourt",
+  "relationships": [
+    {
+      "otherEntityName": "courtType",
+      "otherEntityRelationshipName": "ballCourts",
+      "relationshipName": "courtType",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "savedCourts",
+      "relationshipName": "userProfiles",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

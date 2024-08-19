@@ -1,0 +1,113 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-basketball-court-heading"
+        data-cy="BasketballCourtCreateUpdateHeading"
+        jhiTranslate="pullUpApp3App.basketballCourt.home.createOrEditLabel"
+      >
+        Create or edit a Basketball Court
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="pullUpApp3App.basketballCourt.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courtName" jhiTranslate="pullUpApp3App.basketballCourt.courtName">Court Name</label>
+          <input type="text" class="form-control" name="courtName" id="field_courtName" data-cy="courtName" formControlName="courtName" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_state" jhiTranslate="pullUpApp3App.basketballCourt.state">State</label>
+          <input type="text" class="form-control" name="state" id="field_state" data-cy="state" formControlName="state" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_zipCode" jhiTranslate="pullUpApp3App.basketballCourt.zipCode">Zip Code</label>
+          <input type="number" class="form-control" name="zipCode" id="field_zipCode" data-cy="zipCode" formControlName="zipCode" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_streetAddress" jhiTranslate="pullUpApp3App.basketballCourt.streetAddress"
+            >Street Address</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="streetAddress"
+            id="field_streetAddress"
+            data-cy="streetAddress"
+            formControlName="streetAddress"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_longitude" jhiTranslate="pullUpApp3App.basketballCourt.longitude">Longitude</label>
+          <input type="text" class="form-control" name="longitude" id="field_longitude" data-cy="longitude" formControlName="longitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_latitude" jhiTranslate="pullUpApp3App.basketballCourt.latitude">Latitude</label>
+          <input type="text" class="form-control" name="latitude" id="field_latitude" data-cy="latitude" formControlName="latitude" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_courtType" jhiTranslate="pullUpApp3App.basketballCourt.courtType">Court Type</label>
+          <select
+            class="form-control"
+            id="field_courtType"
+            data-cy="courtType"
+            name="courtType"
+            formControlName="courtType"
+            [compareWith]="compareCourtType"
+          >
+            <option [ngValue]="null"></option>
+            @for (courtTypeOption of courtTypesSharedCollection; track $index) {
+              <option [ngValue]="courtTypeOption">{{ courtTypeOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_userProfiles" jhiTranslate="pullUpApp3App.basketballCourt.userProfiles">User Profiles</label>
+          <select
+            class="form-control"
+            id="field_userProfiles"
+            data-cy="userProfiles"
+            multiple
+            name="userProfiles"
+            formControlName="userProfiles"
+            [compareWith]="compareUserProfile"
+          >
+            @for (userProfileOption of userProfilesSharedCollection; track $index) {
+              <option [ngValue]="userProfileOption">{{ userProfileOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

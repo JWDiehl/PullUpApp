@@ -1,0 +1,161 @@
+<div>
+  <h2 id="page-heading" data-cy="BasketballCourtHeading">
+    <span jhiTranslate="pullUpApp3App.basketballCourt.home.title">Basketball Courts</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="pullUpApp3App.basketballCourt.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-basketball-court"
+        [routerLink]="['/basketball-court/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="pullUpApp3App.basketballCourt.home.createLabel">Create a new Basketball Court</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (basketballCourts?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="pullUpApp3App.basketballCourt.home.notFound">No Basketball Courts found</span>
+    </div>
+  }
+
+  @if (basketballCourts && basketballCourts.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [sortState]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courtName">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.courtName">Court Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="state">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.state">State</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="zipCode">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.zipCode">Zip Code</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="streetAddress">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.streetAddress">Street Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="longitude">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.longitude">Longitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="latitude">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.latitude">Latitude</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="courtType.id">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.courtType">Court Type</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="userProfiles.id">
+              <div class="d-flex">
+                <span jhiTranslate="pullUpApp3App.basketballCourt.userProfiles">User Profiles</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (basketballCourt of basketballCourts; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/basketball-court', basketballCourt.id, 'view']">{{ basketballCourt.id }}</a>
+              </td>
+              <td>{{ basketballCourt.courtName }}</td>
+              <td>{{ basketballCourt.state }}</td>
+              <td>{{ basketballCourt.zipCode }}</td>
+              <td>{{ basketballCourt.streetAddress }}</td>
+              <td>{{ basketballCourt.longitude }}</td>
+              <td>{{ basketballCourt.latitude }}</td>
+              <td>
+                @if (basketballCourt.courtType) {
+                  <div>
+                    <a [routerLink]="['/court-type', basketballCourt.courtType.id, 'view']">{{ basketballCourt.courtType.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @for (userProfiles of basketballCourt.userProfiles; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/user-profile', userProfiles.id, 'view']">{{ userProfiles.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/basketball-court', basketballCourt.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/basketball-court', basketballCourt.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(basketballCourt)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>
