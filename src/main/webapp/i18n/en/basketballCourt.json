@@ -1,0 +1,31 @@
+{
+  "pullUpApp3App": {
+    "basketballCourt": {
+      "home": {
+        "title": "Basketball Courts",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Basketball Court",
+        "createOrEditLabel": "Create or edit a Basketball Court",
+        "notFound": "No Basketball Courts found"
+      },
+      "created": "A new Basketball Court is created with identifier {{ param }}",
+      "updated": "A Basketball Court is updated with identifier {{ param }}",
+      "deleted": "A Basketball Court is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Basketball Court {{ id }}?"
+      },
+      "detail": {
+        "title": "Basketball Court"
+      },
+      "id": "ID",
+      "courtName": "Court Name",
+      "state": "State",
+      "zipCode": "Zip Code",
+      "streetAddress": "Street Address",
+      "longitude": "Longitude",
+      "latitude": "Latitude",
+      "courtType": "Court Type",
+      "userProfiles": "User Profiles"
+    }
+  }
+}

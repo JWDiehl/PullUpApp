@@ -1,0 +1,31 @@
+entity UserProfile {
+  username String
+  email String
+  password String
+  longitude String
+  latitude String
+}
+
+entity BasketballCourt {
+  courtName String
+  state String
+  zipCode Integer
+  streetAddress String
+  longitude String
+  latitude String
+}
+
+entity CourtType {
+  typeName String
+  ballCourtID Long
+}
+
+relationship OneToMany {
+  CourtType{ballCourts} to BasketballCourt{courtType}
+}
+
+relationship ManyToMany {
+  UserProfile{savedCourts} to BasketballCourt{userProfiles}
+}
+
+

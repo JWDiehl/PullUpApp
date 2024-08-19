@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity UserProfile.
+    -->
+    <changeSet id="20240819213322-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="user_profile_id"
+                                 baseTableName="rel_user_profile__saved_courts"
+                                 constraintName="fk_rel_user_profile__saved_courts__user_profile_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="user_profile"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="saved_courts_id"
+                                 baseTableName="rel_user_profile__saved_courts"
+                                 constraintName="fk_rel_user_profile__saved_courts__saved_courts_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="basketball_court"
+                                 />
+    </changeSet>
+</databaseChangeLog>
