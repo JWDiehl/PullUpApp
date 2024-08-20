@@ -1,0 +1,24 @@
+document.addEventListener('DOMContentLoaded', function() {
+  const fetchButton = document.getElementById('fetch-button');
+  const dataContainer = document.getElementById('data-container');
+
+  fetchButton.addEventListener('click', function() {
+    fetch('http://localhost:8080/api/basketball-courts') 
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        displayData(data);
+      })
+      .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+      });
+  });
+
+  function displayData(data) {
+    dataContainer.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  }
+});
