@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PullUp</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <!-- Load the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqKnR8FE3kCIaCGEwKjY04NCSEIO6I6kU&callback=initMap" async defer></script>
+    <script>
+        function initMap() {
+            // Create a map centered on Wilmington, DE
+            const wilmington = { lat: 39.7392, lng: -75.5398 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: wilmington,
+                zoom: 12,
+            });
+
+            // Array of court locations
+            const courts = [
+                {
+                    position: { lat: 39.74671, lng: -75.54934 },
+                    title: "Your Location",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/red-dot.png", // Location of ZIP Code 
+                    infoContent: "<p>Your Location</p>"
+                },
+                {
+                    position: { lat: 39.74573, lng: -75.52716 },
+                    title: "Kingswood Community Center",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Kingswood Community Center
+                    infoContent: "<p>Kingswood Community Center</p>"
+                },
+                {
+                    position: { lat: 39.75127, lng: -75.53189 },
+                    title: "Brown-Burton Winchester Park",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Brown-Burton Winchester Park
+                    infoContent: "<p>Brown-Burton Winchester Park</p>"
+                },
+                {
+                    position: { lat: 39.74988, lng: -75.54008 },
+                    title: "Brandywine Mills Park",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Brandywine Mills Park
+                    infoContent: "<p>Brandywine Mills Park</p>"
+                },
+                {
+                    position: { lat: 39.72859, lng: -75.54591},
+                    title: "Elbert Playground",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Elbert Playground
+                    infoContent: "<p>Elbert Playground</p>"
+                },
+                {
+                    position: { lat: 39.76049, lng: -75.53533 },
+                    title: "Eastlake Playground",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Eastlake Playground
+                    infoContent: "<p>Eastlake Playground</p>"
+                },
+                {
+                    position: { lat: 39.76443, lng: -75.53281 },
+                    title: "Pierre S. Dupont Elementary",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png", // Pierre S. Dupont Elementary
+                    infoContent: "<p>Pierre S. Dupont Elementary - Indoor</p>"
+                },
+                {
+                    position: { lat: 39.7648, lng: 75.53701},
+                    title: "Haynes Park",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Haynes Park
+                    infoContent: "<p>Haynes Park</p>"
+                },
+                {
+                    position: { lat: 39.75509, lng: -75.55341 },
+                    title: "Brandywine Park",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Brandywine Park
+                    infoContent: "<p>Brandywine Park</p>"
+                },
+
+            ];
+
+            // Create markers for each court location
+            courts.forEach(court => {
+                const marker = new google.maps.Marker({
+                    position: court.position,
+                    map: map,
+                    title: court.title,
+                    icon: court.icon // Custom icon for each court
+                });
+
+                // Add an info window to display more information on click
+                const infoWindow = new google.maps.InfoWindow({
+                    content: court.infoContent
+                });
+
+                marker.addListener("click", function() {
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
