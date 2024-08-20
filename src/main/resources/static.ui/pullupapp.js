@@ -1,7 +1,7 @@
 const API_URL = `http://localhost:8080`;
 
 function fetchData() {
-  fetch(`${API_URL}/api/piros`)
+  fetch(`${API_URL}/api/pullup`)
     .then(res => {
       //console.log("res is ", Object.prototype.toString.call(res));
       return res.json();
@@ -32,12 +32,12 @@ function show(data) {
   const list = document.createDocumentFragment();
 
   data.map(function (post) {
-    console.log('Piro:', post);
+    console.log('Pullup:', post);
     let li = document.createElement('li');
     let title = document.createElement('h3');
     let body = document.createElement('p');
     let by = document.createElement('p');
-    title.innerHTML = `<a href="/pirodetail.html?piroid=${post.id}">${post.title}</a>`;
+    title.innerHTML = `<a href="/pullupdetail.html?pullupid=${post.id}">${post.title}</a>`;
     body.innerHTML = `${post.description}`;
     by.innerHTML = `${post.created} - ${post.key}`;
 
