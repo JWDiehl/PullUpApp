@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PullUp</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <!-- Load the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqKnR8FE3kCIaCGEwKjY04NCSEIO6I6kU&callback=initMap" async defer></script>
+    <script>
+        function initMap() {
+            // Create a map centered on Wilmington, DE
+            const wilmington = { lat: 39.7392, lng: -75.5398 };
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: wilmington,
+                zoom: 12,
+            });
+
+            // Array of court locations
+            const courts = [
+                {
+                    position: { lat: 39.74671, lng: -75.54934 },
+                    title: "Court 1",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Custom icon for Court 1
+                    infoContent: "<p>Court 1: Basketball Court A</p>"
+                },
+                {
+                    position: { lat: 39.75120, lng: -75.54840 },
+                    title: "Court 2",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/green-dot.png", // Custom icon for Court 2
+                    infoContent: "<p>Court 2: Basketball Court B</p>"
+                },
+                {
+                    position: { lat: 39.74000, lng: -75.55000 },
+                    title: "Court 3",
+                    icon: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png", // Custom icon for Court 3
+                    infoContent: "<p>Court 3: Basketball Court C</p>"
+                }
+                // Add more courts as needed
+            ];
+
+            // Create markers for each court location
+            courts.forEach(court => {
+                const marker = new google.maps.Marker({
+                    position: court.position,
+                    map: map,
+                    title: court.title,
+                    icon: court.icon // Custom icon for each court
+                });
+
+                // Add an info window to display more information on click
+                const infoWindow = new google.maps.InfoWindow({
+                    content: court.infoContent
+                });
+
+                marker.addListener("click", function() {
+                    infoWindow.open(map, marker);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
