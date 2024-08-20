@@ -13,15 +13,15 @@ entity BasketballCourt {
   streetAddress String
   longitude String
   latitude String
+  courtTypeID Integer
 }
 
 entity CourtType {
   typeName String
-  ballCourtID Long
 }
 
 relationship OneToMany {
-  CourtType{ballCourts} to BasketballCourt{courtType}
+  CourtType{courtTypeID} to BasketballCourt{courtType}
 }
 
 relationship ManyToMany {
