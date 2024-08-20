@@ -19,7 +19,7 @@ function parsePiroId() {
   try {
     var url_string = window.location.href.toLowerCase();
     var url = new URL(url_string);
-    var piroid = url.searchParams.get('piroid');
+    var piroid = url.searchParams.get('pullupid');
     return piroid;
   } catch (err) {
     console.log("Issues with Parsing URL Parameter's - " + err);

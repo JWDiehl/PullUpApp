@@ -2,7 +2,7 @@ const API_URL = `http://localhost:8080`;
 
 function doPostOfForm(event) {
   //event.preventDefault();
-  var floozy = new FormData(document.getElementById('addpiroform'));
+  var floozy = new FormData(document.getElementById('addpullupform'));
 
   var object = {};
   for (var p of floozy) {
@@ -17,7 +17,7 @@ function doPostOfForm(event) {
 
 async function postJSON(data) {
   try {
-    const response = await fetch(`${API_URL}/api/piros`, {
+    const response = await fetch(`${API_URL}/api/pullup`, {
       method: 'POST', // or 'PUT'
       headers: {
         accept: '*/*',
@@ -38,7 +38,7 @@ async function postJSON(data) {
 window.addEventListener(
   'DOMContentLoaded',
   function () {
-    const form = document.getElementById('addpiroform');
+    const form = document.getElementById('addpullupform');
     const button1 = document.getElementById('button1');
     console.log('form is ', form, 'button1 is ', button1, 'doPostOfForm is ', doPostOfForm);
 
