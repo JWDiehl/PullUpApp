@@ -1,20 +1,62 @@
-const { disconnect } = require("process");
+// const { disconnect } = require("process");
 
-async function fetchData() {
-try {
+
+
 const proxyUrl = 'http://127.0.0.1:5500/src/main/resources/static.ui/pullupadd.html';  
 const mainUrl = `http://localhost:8080/api/basketball-courts`
-const response = await fetch(proxyUrl + mainUrl);
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      const data = await response.json();
-      displayData(data);
-}catch{
-    console.error('There has been a problem with your fetch operation:', error);
+const apiUrl = mainUrl;
+const token = localStorage.getItem( 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDI4OTI4MiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MjAyODgyfQ.HDzJKYkk3nE1LzxwVYgRnJlFQKCBPUDxtapBd909XAUFMdjLtib8exRjLIBkKxcPuQ0rH7lTONWRSUE48pel2g'); // Retrieve token from storage
+
+fetch(apiUrl, {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${token}`
+  }
+})
+  .then(response => response.json())
+  .then(data => console.log('Data:', data))
+  .catch(error => console.error('Error:', error));
+
+// const promises = [
+//     fetch(proxyUrl),
+//     fetch(mainUrl)
+//   ];
   
-}
+//   Promise.all(promises)
+//     .then(results => {
+//       // Use `results` here
+//       results.forEach((response, index) => {
+//         console.log(`Response ${index + 1}:`, response);
+//       });
+//     })
+//     .catch(error => {
+//       console.error('Error:', error);
+//     });
+  
+
+
+// fetch(mainUrl+proxyUrl)
+// .then(response => response.json())
+// .then(data => displayData(data))
+// .catch(error => console.error('There has been a problem with your fetch operation:', error));
+
+// async function fetchData() {
+// // try {
+// const proxyUrl = 'http://127.0.0.1:5500/src/main/resources/static.ui/pullupadd.html';  
+// const mainUrl = `http://localhost:8080/api/basketball-courts`
+// const response = await fetch(mainUrl+proxyUrproxyUrl) 
+
+
+//       if (!response.ok) {
+//         throw new Error(`HTTP error! status: ${response.status}`);
+//       }
+//       const data = await response.json();
+//       displayData(data);
+// }catch{
+//     console.error('There has been a problem with your fetch operation:');
+  
+// }
 
 function displayData(data) {
     const container = document.getElementById('court-container');
@@ -29,9 +71,12 @@ function displayData(data) {
         container.appendChild(div);
     });
 }
-}
+// }
 
-fetchData();
+// fetchData();
+// console.log('fetchData has been called');
+
+
 // async function fetchData() {
 //     try {
 //         const response = await fetch(`http://localhost:8080/api/basketball-courts`);
