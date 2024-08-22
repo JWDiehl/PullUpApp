@@ -2,25 +2,26 @@
 
 
 
-const proxyUrl = 'http://127.0.0.1:5500/src/main/resources/static.ui/pullupadd.html';  
-const mainUrl = `http://localhost:8080/api/basketball-courts`
+// const proxyUrl = 'http://127.0.0.1:5500/src/main/resources/static.ui/pullupadd.html';  
+// const mainUrl = `http://localhost:8080/api/basketball-courts`
 
-const apiUrl = mainUrl;
-const token =  'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDI4OTI4MiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MjAyODgyfQ.HDzJKYkk3nE1LzxwVYgRnJlFQKCBPUDxtapBd909XAUFMdjLtib8exRjLIBkKxcPuQ0rH7lTONWRSUE48pel2g'; // Retrieve token from storage
+// const apiUrl = mainUrl;
+// let token =  'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDI4OTI4MiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MjAyODgyfQ.HDzJKYkk3nE1LzxwVYgRnJlFQKCBPUDxtapBd909XAUFMdjLtib8exRjLIBkKxcPuQ0rH7lTONWRSUE48pel2g'; // Retrieve token from storage
 
-fetch('https://reqbin.com/echo', {
-  credentials: 'include'
-})
-   .then(resp => resp.text())
-   .then(html => console.log(html))
+// fetch('https://reqbin.com/echo', {
+//   credentials: 'include'
+// })
+//    .then(resp => resp.text())
+//    .then(html => console.log(html))
 
-fetch(apiUrl, {
-  headers: {Authorization: token}
+fetch('http://localhost:8080/api/basketball-courts', {
+  headers: {Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDI4OTI4MiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MjAyODgyfQ.HDzJKYkk3nE1LzxwVYgRnJlFQKCBPUDxtapBd909XAUFMdjLtib8exRjLIBkKxcPuQ0rH7lTONWRSUE48pel2g'}
 })
    .then(resp => resp.json())
+   .then(data => displayData(data))
    .then(json => console.log(JSON.stringify(json)))
 
-
+// console.log(data);
 
 
    
@@ -87,7 +88,7 @@ function displayData(data) {
       container.appendChild(div);
   });
 }
-
+console.log(data);
 // function displayData(data) {
 //     const container = document.getElementById('court-container');
 
@@ -103,7 +104,7 @@ function displayData(data) {
 // }
 // }
 
-fetchData();
+// fetchData();
 // console.log('fetchData has been called');
 
 
