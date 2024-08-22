@@ -13,8 +13,9 @@
 // })
 //    .then(resp => resp.text())
 //    .then(html => console.log(html))
+  
 
-fetch('http://localhost:8080/api/basketball-courts', {
+let listAllCourts = fetch('http://localhost:8080/api/basketball-courts', {
   headers: {Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDI4OTI4MiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MjAyODgyfQ.HDzJKYkk3nE1LzxwVYgRnJlFQKCBPUDxtapBd909XAUFMdjLtib8exRjLIBkKxcPuQ0rH7lTONWRSUE48pel2g'}
 })
    .then(resp => resp.json())
@@ -88,7 +89,8 @@ function displayData(data) {
       container.appendChild(div);
   });
 }
-console.log(data);
+document.getElementById('fetch-btn').addEventListener('click', fetchData);
+// .addEventListener('click',displayData);
 // function displayData(data) {
 //     const container = document.getElementById('court-container');
 

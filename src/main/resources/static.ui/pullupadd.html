@@ -64,6 +64,11 @@
             width: 100%;
         }
     </style>
+<!-- <script>
+    function listAllCourts{
+        location.href = "listCourts.js"
+    }
+</script> -->
 </head>
 <body>
     <div class="background"></div> <!-- Background image -->
@@ -76,15 +81,15 @@
                 <input type="text" id="location" name="location" class="form-control" required />
                 <button type="button" id="button1" class="btn btn-primary" onclick="doPostOfForm()">Show Courts</button>
             </div>
-            <!-- <button type="button" id="button1" class="btn btn-primary" onclick="doPostOfForm()">Show Courts</button> -->
+            <!-- <button type="button" id="button1" class="btn btn-primary" onclick="listAllCourts()">Show All Courts</button> -->
         </form>
         <h3></h3>
-        <button id="fetch-button">Popular Courts</button>
+        <button id="fetch-btn">Popular Courts</button>
         <!-- <div id="court-container"> -->
         </head>
         <body>
-          <div id="court-container"></div>
-          <script src="listCourts.js"></script>
+          <!-- <div id="court-container"></div> -->
+          <!-- <script src="listCourts.js"></script> -->
         </body>
 
 
@@ -92,10 +97,20 @@
              </div>
         
     </div>
-<script src="listCourts.js"></script>
+    <body>
+        <button id="fetch-btn" onclick="listAllCourts()">Fetch Data</button>
+        <div id="court-container"></div>
+        <!-- <script src="listCourts.js"></script> -->
+    </body>
+<!-- <script src="listCourts.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="./pullupadd.js"></script>
-    
+    <!-- <script>let listAllCourts = fetch('http://localhost:8080/api/basketball-courts', {
+        headers: {Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDI4OTI4MiwiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MjAyODgyfQ.HDzJKYkk3nE1LzxwVYgRnJlFQKCBPUDxtapBd909XAUFMdjLtib8exRjLIBkKxcPuQ0rH7lTONWRSUE48pel2g'}
+      })
+         .then(resp => resp.json())
+         .then(data => displayData(data))
+         .then(json => console.log(JSON.stringify(json)))</script> -->
 </body>
 </html>
