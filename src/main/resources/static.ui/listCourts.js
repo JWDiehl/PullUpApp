@@ -21,6 +21,9 @@ fetch(apiUrl, {
    .then(json => console.log(JSON.stringify(json)))
 
 
+
+
+   
 // fetch(apiUrl,{
 //   method: 'GET',
 //   headers: {
