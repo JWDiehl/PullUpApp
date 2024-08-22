@@ -68,6 +68,7 @@ public class SecurityConfiguration {
             .authorizeHttpRequests(
                 authz ->
                     // prettier-ignore
+
                 authz
                     .requestMatchers(mvc.pattern("/index.html"), mvc.pattern("/*.js"), mvc.pattern("/*.txt"), mvc.pattern("/*.json"), mvc.pattern("/*.map"), mvc.pattern("/*.css")).permitAll()
                     .requestMatchers(mvc.pattern("/*.ico"), mvc.pattern("/*.png"), mvc.pattern("/*.svg"), mvc.pattern("/*.webapp")).permitAll()
@@ -77,6 +78,7 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern("/swagger-ui/**")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.POST, "/api/authenticate")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/authenticate")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/basketball-courts")).permitAll()
                     .requestMatchers(mvc.pattern("/api/register")).permitAll()
                     .requestMatchers(mvc.pattern("/api/activate")).permitAll()
                     .requestMatchers(mvc.pattern("/api/account/reset-password/init")).permitAll()
