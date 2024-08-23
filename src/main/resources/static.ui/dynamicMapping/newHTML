@@ -11,44 +11,39 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif; 
+            font-family: 'Arial', sans-serif;
+        }
         .background {
-        position: absolute; /* Ensures it covers the viewport */
-    top: 0;
-    left: 0;
-    justify-content: ;
-    width: 100%;
-    height: 100%;
-    background: url('images/Basketball - PullUp.jpeg') no-repeat center center;
-    background-size: contain; /* image is fully visible */
-    background-color: #6290b2; /* Optional: adds a background color to fill gaps if the image does not cover the full area */
-    z-index: -1; /* Places the background behind the content */
-}
-
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/Basketball - PullUp.jpeg') no-repeat center center;
+            background-size: contain;
+            background-color: #6290b2;
+            z-index: -1;
+        }
         .container {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             position: absolute;
             top: 25%;
             left: 50%;
-            transform: translate(-50%, -50%); /* Center the container */
-            z-index: 1; /* Ensure content is above the background */
+            transform: translate(-50%, -50%);
+            z-index: 1;
             max-width: 350px;
-            width: 100%; /* Allow the container to be responsive */
+            width: 100%;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background for readability */
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(84, 116, 23, 0.1);
         }
         h1, h2 {
-    border-color: #718354; /* Green border */
-    color: #eee4db; /* text */
-    font-weight: bold; /* Bold text */
+            border-color: #718354;
+            color: #eee4db;
+            font-weight: bold;
             text-align: center;
             color: #343a40;
-        }
-        form {
-            background-color: transparent; /* Keep form background transparent */
         }
         .form-group {
             margin-bottom: 15px;
@@ -58,21 +53,26 @@
         }
         #button1 {
             margin-top: 8px;
-            background-color: #6d7485; /* Green background */
-    border-color: #718354; /* Green border */
-    color: #eee4db; /* text */
-    font-weight: bold; /* Bold text */
+            background-color: #6d7485;
+            border-color: #718354;
+            color: #eee4db;
+            font-weight: bold;
             width: 100%;
         }
-        
     </style>
     <script>
-        function showMap() {
-            location.href = "./pullupdisplay.html";
+        function browseCourts() {
+            const city = document.getElementById('location').value;
+            if (city) {
+                // Redirect to the page with the city parameter
+                location.href = `./src/main/resources/dynamicMapping/pullupTypeInALocal.html?city=${encodeURIComponent(city)}`;
+            } else {
+                alert('Please enter a city name.');
+            }
         }
 
-        function browseCourts() {
-            location.href = "./dynamicMapping/pullupTypeInALocal.html";
+        function showMap() {
+            location.href = "./pullupdisplay.html";
         }
     </script>
 </head>
@@ -81,30 +81,20 @@
     <div class="container">
         <h1>PullUp</h1>
         <h2>Conquer The Parks</h2>
-        <form id="locationForm", id = "court-container">
+        <form id="locationForm">
             <div class="form-group">
                 <label for="location">Location:</label>
                 <input type="text" id="location" name="location" class="form-control" required />
                 <button type="button" id="button1" class="btn btn-primary" onclick="browseCourts()">Browse Courts</button>
-                <button type="button" id="button1" class="btn btn-primary"  onclick="showMap()">Popular Courts</button>
+                <button type="button" id="button1" class="btn btn-primary" onclick="showMap()">Popular Courts</button>
             </div>
-            <!-- <button type="button" id="button1" class="btn btn-primary" onclick="doPostOfForm()">Show Courts</button> -->
-            <!-- <a href="./pullupdisplay.html">Popular Courts</a> -->
-            <section id="button1">
         </form>
         <h3></h3>
-        <!-- <button id="fetch-button" >Popular Courts</button> -->
-        <div id="court-container">
-
-
-            
-             </div>
-        
+        <div id="court-container"></div>
     </div>
-<script src="listCourts.js"></script>
+    <script src="listCourts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <script src="./pullupadd.js"></script>
-    
 </body>
 </html>

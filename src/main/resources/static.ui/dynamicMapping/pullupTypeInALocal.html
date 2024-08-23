@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PullUp</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 80%;
+            width: 100%;
+        }
+        #controls {
+            height: 20%;
+            padding: 10px;
+            box-sizing: border-box;
+            background-color: #f8f9fa;
+        }
+        .form-control {
+            width: 100%;
+        }
+        .btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <h2>PullUp</h2>
+        <input type="text" id="cityInput" class="form-control" placeholder="Enter city name">
+        <button class="btn btn-primary" onclick="searchCity()">Search</button>
+    </div>
+    <div id="map"></div>
+
+    <!-- Load the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqKnR8FE3kCIaCGEwKjY04NCSEIO6I6kU&callback=initMap" async defer></script>
+    <script>
+        let map;
+        let geocoder;
+
+        function initMap() {
+            // Initialize the map centered on Wilmington, DE
+            const defaultLocation = { lat: 39.7392, lng: -75.5398 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: defaultLocation,
+                zoom: 12,
+            });
+
+            // Initialize the Geocoder
+            geocoder = new google.maps.Geocoder();
+
+            // Check if there is a city parameter in the URL
+            const params = new URLSearchParams(window.location.search);
+            const city = params.get('city');
+
+            if (city) {
+                // Geocode the city and center the map on it
+                geocoder.geocode({ address: city }, (results, status) => {
+                    if (status === "OK") {
+                        const location = results[0].geometry.location;
+                        map.setCenter(location);
+                        map.setZoom(12);
+
+                        // Optionally, add a marker for the searched location
+                        new google.maps.Marker({
+                            map: map,
+                            position: location,
+                            title: city
+                        });
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            }
+        }
+
+        function searchCity() {
+            const city = document.getElementById("cityInput").value;
+
+            if (city) {
+                geocoder.geocode({ address: city }, (results, status) => {
+                    if (status === "OK") {
+                        const location = results[0].geometry.location;
+                        map.setCenter(location);
+                        map.setZoom(12);
+
+                        // Optionally, add a marker for the searched location
+                        new google.maps.Marker({
+                            map: map,
+                            position: location,
+                            title: city
+                        });
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
+                });
+            } else {
+                alert("Please enter a city name.");
+            }
+        }
+    </script>
+</body>
+</html>
