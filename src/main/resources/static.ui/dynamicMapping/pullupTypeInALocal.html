@@ -13,45 +13,54 @@
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         }
         #map {
-            height: 100%; /* Full height */
+            height: 100%; 
             width: 100%;
-            position: absolute; /* Absolute positioning */
-            top: 60px; /* Push down by the height of the controls */
+            position: absolute; 
+            top: 60px; 
             left: 0;
         }
         #controls {
-            height: 60px; /* Fixed height for controls */
-            width: 100%; /* Full width */
+            height: 60px; /*fixed height for controls */
+            width: 100%; /*full width */
             padding: 10px;
             box-sizing: border-box;
-            position: fixed; /* Fix controls to the top */
+            position: fixed; /*fix controls to the top */
             top: 0;
             left: 0;
-            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-            border-bottom: 1px solid #ced4da; /* Border for separation */
-            z-index: 1000; /* Ensure it sits above the map */
+            background-color: rgba(255, 255, 255, 0.8); /*semi-transparent background */
+            border-bottom: 1px solid #ced4da; /* border for separation */
+            z-index: 1000; /* sits above the map */
             display: flex;
             align-items: center;
-            justify-content: center; /* Center content horizontally */
+            justify-content: center; /* center content horizontally */
         }
         .form-control {
-            border-radius: 4px; /* Rounded corners */
-            border: 1px solid #ced4da; /* Border color */
-            margin-right: 10px; /* Space between input and button */
-            flex: 1; /* Allow input to take up available space */
+            border-radius: 4px; /* rounded corners */
+            border: 1px solid #ced4da; /* border color */
+            margin-right: 10px; /* space between input and button */
+            flex: 1; /* input w/ available space */
         }
         .btn {
-            background-color: #6d7485; /* Background color */
+            background-color: #23341b; /* Background color */
             border-color: #718354; /* Border color */
             color: #eee4db; /* Text color */
+            font-weight: bold;
+        }
+        .btn:hover {
+            text-emphasis-color: #111c0b;
+            margin-top: 2px;
+            background-color: #e0cabc;
+            border-color: #111c0b;
+            color: #111c0b;
             font-weight: bold;
         }
     </style>
 </head>
 <body>
     <div id="controls">
-        <input type="text" id="cityInput" class="form-control" placeholder="Enter city name">
-        <button class="btn btn-primary" onclick="searchCity()">Search</button>
+        <input type="text" id="cityInput" class="form-control" placeholder="Enter city or park name" style="color: #23341b; font-display: #e0cabc;" />
+
+        <button class="btn btn-secondary" onclick="searchCity()">Search</button>
     </div>
     <div id="map"></div>
 
@@ -62,7 +71,7 @@
         let geocoder;
 
         function initMap() {
-            const defaultLocation = { lat: 39.7392, lng: -75.5398 };
+            const defaultLocation = { lat: 40.752318, lng: -73.961434 };
             map = new google.maps.Map(document.getElementById("map"), {
                 center: defaultLocation,
                 zoom: 12,
@@ -114,7 +123,7 @@
 
                 const courts = await response.json();
 
-                // Clear existing markers
+                //clear existing markers
                 if (window.markers) {
                     window.markers.forEach(marker => marker.setMap(null));
                 }
@@ -151,7 +160,7 @@
             const city = document.getElementById("cityInput").value;
 
             if (city) {
-                // Update the URL to include the city parameter and reload the page
+                //update the URL to include the city parameter and reload the page
                 window.location.search = `?city=${encodeURIComponent(city)}`;
             } else {
                 alert("Please enter a city name.");
