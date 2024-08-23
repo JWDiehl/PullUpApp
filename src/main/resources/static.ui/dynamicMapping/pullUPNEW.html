@@ -50,8 +50,8 @@
             font-weight: bold;
             text-align: center;
             color: #23341b;
-            font-size: 3.6rem; /* Adjust the size as needed */
-            letter-spacing: 2px; /* Increase the letter spacing */
+            font-size: 3.6rem; 
+            letter-spacing: 2px; 
         }
         h6 {
             border-color: #718354;
@@ -59,19 +59,19 @@
             font-weight: bold;
             text-align: center;
             color: #23341b;
-            font-size: 1.2rem; /* Adjust the size as needed */
-            letter-spacing: 3.9px; /* Increase the letter spacing */
+            font-size: 1.2rem; 
+            letter-spacing: 3.9px;
         }
         .form-group {
             color: #23341b;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 0; /* Adjust margin as needed */
+            margin-bottom: 0;
         }
         .form-control {
             color: #23341b;
-            width: 92%; /* Adjust width here */
+            width: 92%; 
         }
         #button1 {
             margin-top: 8px;
@@ -80,6 +80,15 @@
             color: #e9e1de
 
 ;
+            font-weight: bold;
+            width: 92%;
+        }
+        #button1:hover {
+            text-emphasis-color: #111c0b;
+            margin-top: 8px;
+            background-color: #e0cabc;
+            border-color: #111c0b;
+            color: #111c0b;
             font-weight: bold;
             width: 92%;
         }
@@ -111,7 +120,7 @@
         <h6 class="centered-text">Conquer The Parks</h6>
         <form id="locationForm">
             <div class="form-group">
-                <input type="text" id="location" name="location" class="form-control" placeholder="Enter city name" />
+                <input type="text" id="location" name="location" class="form-control" placeholder="Enter city or park name" style="color: #23341b; font-display: #e0cabc;" />
                 <button type="button" id="button1" class="btn btn-primary" onclick="browseCourts()">Browse Courts</button>
                 <button type="button" id="button1" class="btn btn-primary" onclick="showMap()">Popular Courts</button>
                 <button type="button" id="button1" class="btn btn-primary" onclick="showSavedCourts()">Saved Courts</button>
