@@ -20,23 +20,27 @@
             width: 100%;
             height: 100%;
             background-image: url('../Images/Basketball%20-%20PullUp.jpeg');
-            background-size: contain;
+            background-size: cover; /* Ensure the background covers the entire area */
             background-color: #6290b2;
             z-index: -1;
         }
         .container {
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            position: absolute;
-            top: 25%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            max-width: 350px;
-            width: 100%;
+            position: fixed; /* Ensure it stays fixed in place */
+            top: 38px; /* Align to the top of the viewport */
+            left: 0; /* Align to the left of the viewport */
+            right: 0; /* Align to the left of the viewport */
+            width: 100%; /* Full width of the viewport */
+            height: 90%; /* Full height of the viewport */
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(84, 116, 23, 0.1);
+            display: flex; /* Use flexbox to center content */
+            flex-direction: column; /* Stack content vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center vertically */
+            z-index: 1;
         }
         h1, h2 {
             border-color: #718354;
@@ -60,43 +64,13 @@
             width: 100%;
         }
     </style>
-    <script>
-        function browseCourts() {
-            const city = document.getElementById('location').value;
-            if (city) {
-                //redirect to the second page with the city as a query parameter
-                location.href = `./pullupTypeInALocal.html?city=${encodeURIComponent(city)}`;
-            } else {
-                alert('Please enter a city name.');
-            }
-        }
-
-        function showMap() {
-            location.href = "./dynamicGoogleMapCourts.html";
-        }
-
-
-        //Write pathway function here 
-        function showSavedCourts() {
-            location.href = "./savedCourtsTable.html";
-        }
-
-
-    </script>
 </head>
 <body>
     <div class="background"></div> <!-- Background image -->
     <div class="container">
         <h1>PullUp</h1>
         <h2>Conquer The Parks</h2>
-        <form id="locationForm">
-            <div class="form-group">
-                <input type="text" id="location" name="location" class="form-control" placeholder="Enter city name" />
-                <button type="button" id="button1" class="btn btn-primary" onclick="browseCourts()">Browse Courts</button>
-                <button type="button" id="button1" class="btn btn-primary" onclick="showMap()">Popular Courts</button>
-                <button type="button" id="button1" class="btn btn-primary" onclick="showSavedCourts()">Saved Courts</button>
-            </div>
-        </form>
+        <h3><Table>Here</Table></h3>
     </div>
     <script src="listCourts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
