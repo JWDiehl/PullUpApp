@@ -14,15 +14,25 @@
 //    .then(resp => resp.text())
 //    .then(html => console.log(html))
 
-// document.addEventListener('DOMContentLoad', () => {
+document.addEventListener('DOMContentLoad', () => {
 
-//   const button = document.getElementById('fetch-btn2');
-//   if(button){
-//   button.addEventListener('click', listAllCourtsByID);
-//   }
-//   else{console.log('Button not found');}
-//   });
-  
+  const button = document.getElementById('fetch-btn2');
+  if(button){
+  button.addEventListener('click', () => {console.log('Fetching data...');
+    listAllCourtsByID();
+    console.log('Fetching');
+  });}
+  else{console.log('Button not found');}
+  });
+
+//  const listAllCourtsByID = fetch('http://localhost:8080/api/basketball-courts/3', {
+//   headers: {Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ1Nzk0NywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MzcxNTQ3fQ.SEHL7om-FnN_7jr_s1fyUG-b9Jd-Umqjen364w4R4JQUeasRlr5JbnUoWOPY_v_hGVV6OD-bR_m0t85EKxStXQ'}
+// })
+//    .then(resp => resp.json())
+//    .then(data => displayData(data))
+//    .then(json => console.log(JSON.stringify(json)));
+
+
 
 function listAllCourtsByID (){ fetch('http://localhost:8080/api/basketball-courts/3', {
   headers: {Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ1Nzk0NywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0MzcxNTQ3fQ.SEHL7om-FnN_7jr_s1fyUG-b9Jd-Umqjen364w4R4JQUeasRlr5JbnUoWOPY_v_hGVV6OD-bR_m0t85EKxStXQ'}
@@ -95,14 +105,14 @@ container.appendChild(div);
 }
 
 
-document.addEventListener('DOMContentLoad', () => {
+// document.addEventListener('DOMContentLoad', () => {
 
-  const button = document.getElementById('fetch-btn2');
-  if(button){
-  button.addEventListener('click', () => {console.log('Fetching data...'); listAllCourtsByID();});
-  }
-  else{console.log('Button not found');}
-  });
+//   const button = document.getElementById('fetch-btn2');
+//   if(button){
+//   button.addEventListener('click', () => {console.log('Fetching data...'); listAllCourtsByID();});
+//   }
+//   else{console.log('Button not found');}
+//   });
   
 // }
 // function displayData(data) {
