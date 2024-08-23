@@ -65,7 +65,7 @@
             const defaultLocation = { lat: 39.7392, lng: -75.5398 };
             map = new google.maps.Map(document.getElementById("map"), {
                 center: defaultLocation,
-                zoom: 12,
+                zoom: 15,
             });
 
             geocoder = new google.maps.Geocoder();
@@ -84,7 +84,7 @@
                 if (status === "OK") {
                     const location = results[0].geometry.location;
                     map.setCenter(location);
-                    map.setZoom(12);
+                    map.setZoom(15);
 
                     new google.maps.Marker({
                         map: map,
