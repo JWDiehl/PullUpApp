@@ -81,6 +81,8 @@ public class SecurityConfiguration {
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/basketball-courts")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/basketball-courts/{id}")).permitAll()
                     .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user-profiles?eagerload=true")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/user-profiles/{id}")).permitAll()
+                    .requestMatchers(mvc.pattern(HttpMethod.GET, "/api/court-types")).permitAll()
                     .requestMatchers(mvc.pattern("/api/register")).permitAll()
                     .requestMatchers(mvc.pattern("/api/activate")).permitAll()
                     .requestMatchers(mvc.pattern("/api/account/reset-password/init")).permitAll()

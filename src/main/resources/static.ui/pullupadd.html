@@ -85,10 +85,10 @@
         </form>
         <h3></h3>
         <button id="fetch-btn">Popular Courts</button>
-        <!-- <div id="court-container"> -->
+        <div id="court-container">
         </head>
         <body>
-          <!-- <div id="court-container"></div> -->
+          <div id="court-container"></div>
           <!-- <script src="listCourts.js"></script> -->
         </body>
 
@@ -100,8 +100,9 @@
      
     <body>
         <!-- <button type="button" id="fetch-btn2" class="button" >Show Courts</button> -->
+         <h4></h4>
         <button id="fetch-btn2" onclick = listAllCourtsByID()>Fetch Data</button>
-        <div id="court-containerID"></div>
+        <div id="profile-containerID"></div>
        <script src="listCourtsID.js" ></script>
        <script>
       function listAllCourtsByID (){ fetch('http://localhost:8080/api/basketball-courts/3', {
