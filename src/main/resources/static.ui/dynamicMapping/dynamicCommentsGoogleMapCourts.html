@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball Courts Map</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 80%;
+        }
+        #comments {
+            height: 20%;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="comments">Click on a marker to see details here.</div>
+
+    <!-- Load the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqKnR8FE3kCIaCGEwKjY04NCSEIO6I6kU&callback=initMap&v=weekly" async defer></script>
+    <script>
+        let map;
+        let markers = [];
+        let commentsDiv = document.getElementById("comments");
+
+        function initMap() {
+            const rutkerPark = { lat: 40.82941, lng: -73.93629 }; //Rutker Park
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: rutkerPark,
+                zoom: 20,
+                mapTypeId: google.maps.MapTypeId.SATELLITE //satellite
+            });
+
+            fetchDataAndAddMarkers();
+        }
+
+        async function fetchDataAndAddMarkers() {
+            try {
+                const response = await fetch('http://localhost:8080/api/basketball-courts', {
+                    headers: { Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDc2NDUyMywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0Njc4MTIzfQ.Fj51p-i4MMv0PXNS4VsZA03gqbR9hZPedEBLK5TEjau43SqBslMjojQQyCVO1Fg4ifgqE9mKcYA1jfIKaCHLlg' }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const courts = await response.json();
+
+                markers = courts.map(court => {
+                    const location = {
+                        lat: parseFloat(court.latitude),
+                        lng: parseFloat(court.longitude)
+                    };
+
+                    return new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        title: court.courtName,
+                        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    });
+                });
+
+                markers.forEach((marker, index) => {
+                    marker.addListener("click", () => {
+                        const court = courts[index];
+                        commentsDiv.innerHTML = `<h3>${court.courtName}</h3><p>${court.streetAddress}</p>`;
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching data or adding markers:', error);
+            }
+        }
+    </script>
+</body>
+</html>
