@@ -20,30 +20,30 @@
             left: 0;
         }
         #controls {
-            height: 60px; /*fixed height for controls */
-            width: 100%; /*full width */
+            height: 60px; 
+            width: 100%; 
             padding: 10px;
             box-sizing: border-box;
-            position: fixed; /*fix controls to the top */
+            position: fixed; 
             top: 0;
             left: 0;
-            background-color: rgba(255, 255, 255, 0.8); /*semi-transparent background */
-            border-bottom: 1px solid #ced4da; /* border for separation */
-            z-index: 1000; /* sits above the map */
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-bottom: 1px solid #ced4da; 
+            z-index: 1000; 
             display: flex;
             align-items: center;
-            justify-content: center; /* center content horizontally */
+            justify-content: center; 
         }
         .form-control {
-            border-radius: 4px; /* rounded corners */
-            border: 1px solid #ced4da; /* border color */
-            margin-right: 10px; /* space between input and button */
-            flex: 1; /* input w/ available space */
+            border-radius: 4px; 
+            border: 1px solid #ced4da; 
+            margin-right: 10px; 
+            flex: 1; 
         }
         .btn {
-            background-color: #23341b; /* Background color */
-            border-color: #718354; /* Border color */
-            color: #eee4db; /* Text color */
+            background-color: #23341b; 
+            border-color: #718354; 
+            color: #eee4db; 
             font-weight: bold;
         }
         .btn:hover {
@@ -101,7 +101,6 @@
                         title: city
                     });
 
-                    // Optionally, refetch courts data if needed based on city
                     fetchAndDisplayCourts(location);
                 } else {
                     alert("Geocode was not successful for the following reason: " + status);
