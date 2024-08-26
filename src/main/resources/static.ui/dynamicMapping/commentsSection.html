@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PullUp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        }
+        #map {
+            height: 70%;
+            width: 100%;
+            position: absolute;
+            top: 60px;
+            left: 0;
+        }
+        #controls {
+            height: 60px;
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid #ced4da;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-control {
+            border-radius: 4px;
+            border: 1px solid #ced4da;
+            margin-right: 10px;
+            flex: 1;
+        }
+        .btn {
+            background-color: #23341b;
+            border-color: #718354;
+            color: #eee4db;
+            font-weight: bold;
+        }
+        .btn:hover {
+            text-emphasis-color: #111c0b;
+            margin-top: 2px;
+            background-color: #e0cabc;
+            border-color: #111c0b;
+            color: #111c0b;
+            font-weight: bold;
+        }
+        #comments-section {
+            height: 30%;
+            width: 100%;
+            padding: 10px;
+            border-top: 1px solid #ced4da;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+        #comments {
+            max-height: 150px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        #comments-form {
+            display: flex;
+            flex-direction: column;
+        }
+        #comments-form textarea {
+            width: 100%;
+            height: 60px;
+            padding: 10px;
+            margin-bottom: 10px;
+            resize: none;
+        }
+        #comments-form button {
+            align-self: flex-end;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #comments-form button:hover {
+            background-color: #0056b3;
+        }
+        .comment {
+            border-bottom: 1px solid #ddd;
+            padding: 5px 0;
+        }
+        .comment button {
+            border: none;
+            background: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <input type="text" id="cityInput" class="form-control" placeholder="Enter city or park name" style="color: #23341b; font-display: #e0cabc;" />
+        <button class="btn btn-secondary" onclick="searchCity()">Search</button>
+    </div>
+    <div id="map"></div>
+    <div id="comments-section" style="display: none;">
+        <div id="comments">Select a marker to see and add comments.</div>
+        <form id="comments-form">
+            <textarea id="comment-input" placeholder="Write your comment..."></textarea>
+            <button type="button" onclick="postComment()">Post Comment</button>
+        </form>
+    </div>
+
+    <!-- Load the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqKnR8FE3kCIaCGEwKjY04NCSEIO6I6kU&callback=initMap" async defer></script>
+    <script>
+        let map;
+        let markers = [];
+        let currentCourtId = null;
+        const commentsDiv = document.getElementById("comments");
+        const commentsSection = document.getElementById("comments-section");
+        const commentInput = document.getElementById("comment-input");
+
+        function initMap() {
+            const defaultLocation = { lat: 40.752318, lng: -73.961434 };
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: defaultLocation,
+                zoom: 12,
+            });
+
+            fetchAndDisplayCourts();
+
+            const params = new URLSearchParams(window.location.search);
+            const city = params.get('city');
+
+            if (city) {
+                geocodeCity(city);
+            }
+        }
+
+        function geocodeCity(city) {
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ address: city }, (results, status) => {
+                if (status === "OK") {
+                    const location = results[0].geometry.location;
+                    map.setCenter(location);
+                    map.setZoom(12);
+
+                    new google.maps.Marker({
+                        map: map,
+                        position: location,
+                        title: city
+                    });
+
+                    fetchAndDisplayCourts(location);
+                } else {
+                    alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
+        }
+
+        async function fetchAndDisplayCourts(location) {
+            try {
+                const response = await fetch('http://localhost:8080/api/basketball-courts', {
+                    headers: {
+                        Authorization:'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDc2NDUyMywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0Njc4MTIzfQ.Fj51p-i4MMv0PXNS4VsZA03gqbR9hZPedEBLK5TEjau43SqBslMjojQQyCVO1Fg4ifgqE9mKcYA1jfIKaCHLlg' // Replace with actual token
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const courts = await response.json();
+
+                // Clear existing markers
+                if (markers.length) {
+                    markers.forEach(marker => marker.setMap(null));
+                }
+
+                markers = courts.map(court => {
+                    const location = {
+                        lat: parseFloat(court.latitude),
+                        lng: parseFloat(court.longitude)
+                    };
+
+                    return new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        title: court.courtName,
+                        icon: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                    });
+                });
+
+                markers.forEach((marker, index) => {
+                    marker.addListener("click", () => {
+                        const court = courts[index];
+                        currentCourtId = court.id;
+                        commentsSection.style.display = 'block';
+                        fetchComments(court.id);
+                    });
+                });
+            } catch (error) {
+                console.error('Error fetching data or adding markers:', error);
+            }
+        }
+
+        async function fetchComments(courtId) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/comments?courtId=${courtId}`, {
+                    headers: {
+                        Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDc2NDUyMywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0Njc4MTIzfQ.Fj51p-i4MMv0PXNS4VsZA03gqbR9hZPedEBLK5TEjau43SqBslMjojQQyCVO1Fg4ifgqE9mKcYA1jfIKaCHLlg' // Replace with actual token// Replace with actual token
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const comments = await response.json();
+                displayComments(comments);
+            } catch (error) {
+                console.error('Error fetching comments:', error);
+            }
+        }
+
+        function displayComments(comments) {
+            commentsDiv.innerHTML = '';
+            comments.forEach(comment => {
+                const commentElement = document.createElement("div");
+                commentElement.className = 'comment';
+                commentElement.innerHTML = `
+                    <p>${comment.text}</p>
+                    <button onclick="likeComment(${comment.id})">Like (${comment.likes})</button>
+                `;
+                commentsDiv.appendChild(commentElement);
+            });
+        }
+
+        async function postComment() {
+            if (!currentCourtId) {
+                alert("Please select a court.");
+                return;
+            }
+
+            const commentText = commentInput.value.trim();
+
+            if (!commentText) {
+                alert("Please enter a comment.");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8080/api/comments', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDc2NDUyMywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0Njc4MTIzfQ.Fj51p-i4MMv0PXNS4VsZA03gqbR9hZPedEBLK5TEjau43SqBslMjojQQyCVO1Fg4ifgqE9mKcYA1jfIKaCHLlg' // Replace with actual token// Replace with actual token
+                    },
+                    body: JSON.stringify({ courtId: currentCourtId, text: commentText })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const newComment = await response.json();
+                commentInput.value = ''; // Clear the input field
+                fetchComments(currentCourtId); // Refresh comments
+            } catch (error) {
+                console.error('Error posting comment:', error);
+            }
+        }
+
+        async function likeComment(commentId) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/comments/${commentId}/like`, {
+                    method: 'POST',
+                    headers: {
+                        Authorization: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDc2NDUyMywiYXV0aCI6IlJPTEVfQURNSU4gUk9MRV9VU0VSIiwiaWF0IjoxNzI0Njc4MTIzfQ.Fj51p-i4MMv0PXNS4VsZA03gqbR9hZPedEBLK5TEjau43SqBslMjojQQyCVO1Fg4ifgqE9mKcYA1jfIKaCHLlg' // Replace with actual token
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                fetchComments(currentCourtId); // Refresh comments to show updated like count
+            } catch (error) {
+                console.error('Error liking comment:', error);
+            }
+        }
+
+        function searchCity() {
+            const city = document.getElementById("cityInput").value;
+
+            if (city) {
+                // Update the URL to include the city parameter and reload the page
+                window.location.search = `?city=${encodeURIComponent(city)}`;
+            } else {
+                alert("Please enter a city name.");
+            }
+        }
+    </script>
+</body>
+</html>
+
