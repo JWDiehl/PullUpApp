@@ -33,10 +33,10 @@ To get started with PullUp, simply download the app from your preferred app stor
 
 ## 💬 **Feedback and Contributions**
 
-We welcome your feedback and contributions! If you have suggestions, find a bug, or want to contribute to the development of PullUp, please check out our [GitHub repository](#) and join our community of basketball enthusiasts.
+We welcome your feedback and contributions! If you have suggestions, find a bug, or want to contribute to the development of PullUp, please check out our [[GitHub repository](#)](https://github.com/JWDiehl/PullUpApp.git) and join our community of basketball enthusiasts.
 
 ---
 
 ### **Contact Us**
 
-For any questions or support, please reach out to us at [support@pullupapp.com](mailto:support@pullupapp.com).
+For any questions or support, please reach out to us at [jondiehl22@gmail.com](mailto:jondiehl22@gmail.com).
