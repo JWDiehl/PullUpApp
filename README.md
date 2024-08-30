@@ -39,4 +39,4 @@ We welcome your feedback and contributions! If you have suggestions, find a bug,
 
 ### **Contact Us**
 
-For any questions or support, please reach out to us at [jondiehl22@gmail.com](mailto:jondiehl22@gmail.com).
+For any questions or support, please reach out to us at [jondiehl22@gmail.com](mailto:jondiehl22@gmail.com) & [williamchapman53@gmail.com](mailto:williamchapman53@gmail.com).
