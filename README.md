@@ -1,6 +1,6 @@
 # PullUp: Conquer the Parks
 
-**PullUp** is your ultimate mobile companion for connecting basketball players and finding the perfect court to shoot hoops. Whether you're a seasoned player or just getting started, PullUp enhances your basketball experience by helping you discover nearby courts and connect with fellow enthusiasts.
+**PullUp** is your ultimate web application for connecting basketball players and finding the perfect court to shoot hoops. Whether you're a seasoned player or just getting started, PullUp enhances your basketball experience by helping you discover nearby courts and connect with fellow enthusiasts.
 
 <img width="1416" alt="Screen Shot 2024-08-29 at 3 27 01 PM" src="https://github.com/user-attachments/assets/73794b05-2d8a-4605-9712-93d7651da4f7">
 
